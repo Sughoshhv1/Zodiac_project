@@ -1,0 +1,280 @@
+package com.example.zodi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DatePickerDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+    Button button;
+    TextView textview;
+    ImageView imageView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        button = findViewById(R.id.button);
+        textview=findViewById(R.id.textView);
+        imageView= findViewById(R.id.zodiacImageView);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar c= Calendar.getInstance();
+                int year=c.get(Calendar.YEAR);
+                int month=c.get(Calendar.MONTH);
+                int day=c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this,
+                        MainActivity.this, year,month,day);
+                datePickerDialog.show();
+            }
+        });
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        textview.setText(getZodiacSign(dayOfMonth,month));
+        textview.setText(getZodiacInfo(dayOfMonth,month));
+        String sign= getZodiacSign(dayOfMonth, month); ;
+        int imageResId = getZodiacImage(sign);
+        setZodiacImage(imageResId);
+    }
+
+    private String getZodiacInfo(int day,int month){
+        String zodiacIfo ="";
+        String zodiac="";
+
+        if(month==0){
+            if(day<20){
+                zodiacIfo="Capricon" +"\n"+"Capricorn: Consistent "+"\n"
+                       + "Methodical, practical and determined, there is no deterring a Capricorn once they have a goal in their sights. Not one for small talk and vain flattery, this quest for keeping things real means that your inner circle is small but loyal. ";
+            }
+            else{
+                zodiacIfo="Aquarius"+"\n"+"Aquarius: Philosophical"+"\n"+"Don’t let the ‘aqua’ in its moniker fool you. This airy sign is not one to get tied down with arbitrary ideals. At the risk of earning a reputation as detached and aloof, this analytical and innovative sign would rather stand at the fringes of the crowd instead of following the herd. ";
+            }
+        }else if(month==1){
+            if(day<20){
+                zodiacIfo="Aquarius"+"\n"+"Aquarius: Philosophical"+"\n"+"Don’t let the ‘aqua’ in its moniker fool you. This airy sign is not one to get tied down with arbitrary ideals. At the risk of earning a reputation as detached and aloof, this analytical and innovative sign would rather stand at the fringes of the crowd instead of following the herd. ";;
+            }
+            else{
+                zodiacIfo="Pisces"+"\n"+"Pisces: Romantic"+"\n"+"Yes, Pisces tends to see the world through rose-coloured glasses but your hopelessly romantic soul is grounded in a deep sense of intuition, sensitivity and empathy which helps you connect with people on a deeper level beyond what the world sees.  ";
+            }
+        }else if(month==2){
+            if(day<20){
+                zodiacIfo="Pisces"+"\n"+"Pisces: Romantic"+"\n"+"Yes, Pisces tends to see the world through rose-coloured glasses but your hopelessly romantic soul is grounded in a deep sense of intuition, sensitivity and empathy which helps you connect with people on a deeper level beyond what the world sees.  ";
+                ;
+            }
+            else{
+                zodiacIfo="Aries"+"Aries: Courage"+"\n"+"As the first sign in the zodiac lineup, it should come as no surprise that Aries is always ready to dive headfirst into a challenge. This up-and-at-’em attitude means that you don’t let life’s setbacks keep you down for long—there’s always a new mountain to be conquered!";
+            }
+        }else if(month==3){
+            if(day<20){
+                zodiacIfo="Aries"+"\n"+"Aries: Courage"+"\n"+"As the first sign in the zodiac lineup, it should come as no surprise that Aries is always ready to dive headfirst into a challenge. This up-and-at-’em attitude means that you don’t let life’s setbacks keep you down for long—there’s always a new mountain to be conquered!";;
+            }
+            else{
+                zodiacIfo="Taurus"+"\n"+"Taurus: Stable"+"\n"+"As an earth sign, the bull of the zodiac sphere is known to remain grounded, practical and responsible. A steady constant in everyone’s lives, this sense of dependability is what helps your friends lean on you when the going gets tough. ";
+            }
+        }else if(month==4){
+            if(day<20){
+                zodiacIfo="Taurus"+"\n"+"Taurus: Stable"+"\n"+"As an earth sign, the bull of the zodiac sphere is known to remain grounded, practical and responsible. A steady constant in everyone’s lives, this sense of dependability is what helps your friends lean on you when the going gets tough. ";;
+            }
+            else{
+                zodiacIfo="Gemini"+"\n"+"Gemini: Outgoing"+"\n"+"The twins of the zodiac universe have a refreshing duality that makes them attract people like a magnet. Inquisitive yet adaptable, playful yet sensitive—that’s you, Gemini! Some might call you indecisive but this sense of curiosity for what the world has to offer next means that things will never get stale. ";
+            }
+        }else if(month==5){
+            if(day<20){
+                zodiacIfo="Gemini"+"\n"+"Gemini: Outgoing"+"\n"+"The twins of the zodiac universe have a refreshing duality that makes them attract people like a magnet. Inquisitive yet adaptable, playful yet sensitive—that’s you, Gemini! Some might call you indecisive but this sense of curiosity for what the world has to offer next means that things will never get stale. ";;
+            }
+            else{
+                zodiacIfo="Cancer"+"\n"+"Cancer: Loyal"+"\n"+"With an emotional register that is dictated by passion, warmth and a nurturing spirit, a Cancer is as loyal as the day is long. The homebody of the zodiac wheel, your loved ones feel a sense of belonging when they are with you.";;
+
+            }
+        }else if(month==6){
+            if(day<20){
+                zodiacIfo="Cancer"+"\n"+"Cancer: Loyal"+"\n"+"With an emotional register that is dictated by passion, warmth and a nurturing spirit, a Cancer is as loyal as the day is long. The homebody of the zodiac wheel, your loved ones feel a sense of belonging when they are with you.";;
+            }
+            else{
+                zodiacIfo="Leo"+"\n"+"Leo: Confidence"+"\n"+"Outgoing, cheerful and theatrical—nobody could ever accuse Leo of lack of confidence! You know what you want in life and you are unabashed in your quest to get it done. The world might think that you thrive on being the centre of attention but it is obvious that the spotlight loves you. ";
+            }
+        }else if(month==7){
+            if(day<20){
+                zodiacIfo="Leo"+"\n"+"Leo: Confidence"+"\n"+"Outgoing, cheerful and theatrical—nobody could ever accuse Leo of lack of confidence! You know what you want in life and you are unabashed in your quest to get it done. The world might think that you thrive on being the centre of attention but it is obvious that the spotlight loves you. ";;
+            }
+            else{
+                zodiacIfo="Virgo"+"\n"+"Virgo: Perfectionism"+"\n"+"If you want something done, call anybody. But if you want it done right, call a Virgo. Methodical, meticulous and detail-oriented to a fault, the world is in disarray and it is clearly only your diligence that can set it back in order. ";
+            }
+        }else if(month==8){
+            if(day<20){
+                zodiacIfo="Virgo"+"\n"+"Virgo: Perfectionism"+"\n"+"If you want something done, call anybody. But if you want it done right, call a Virgo. Methodical, meticulous and detail-oriented to a fault, the world is in disarray and it is clearly only your diligence that can set it back in order. ";;
+            }
+            else{
+                zodiacIfo="Libra"+"\n"+"Libra: Balance"+"\n"+"Harmony and peace assume top billing on your zodiac sign’s calling card, and with good reason. Symbolised by the scales, you are known for your sense of fairness and justice that drives you to establish equilibrium in all aspects of your life. ";
+            }
+        }else if(month==9){
+            if(day<20){
+                zodiacIfo="Libra"+"\n"+"Libra: Balance"+"\n"+"Harmony and peace assume top billing on your zodiac sign’s calling card, and with good reason. Symbolised by the scales, you are known for your sense of fairness and justice that drives you to establish equilibrium in all aspects of your life. ";;
+            }
+            else{
+                zodiacIfo="Scorpio"+"\n"+"Scorpio: Passionate "+"\n"+"Among the most misunderstood signs of the zodiac, what the world sees as aggressive and confrontational is actually your deep-rooted passion for standing up for the underdog. There are no laurels for fighting others’ battles for them, but your deeply passionate nature means that you won’t go down without a fight. ";
+            }
+        }else if(month==10){
+            if(day<20){
+                zodiacIfo="Scorpio"+"\n"+"Scorpio: Passionate "+"\n"+"Among the most misunderstood signs of the zodiac, what the world sees as aggressive and confrontational is actually your deep-rooted passion for standing up for the underdog. There are no laurels for fighting others’ battles for them, but your deeply passionate nature means that you won’t go down without a fight. ";;
+            }
+            else{
+                zodiacIfo="Sagittarius"+"\n"+"Sagittarius: Spontaneous"+"\n"+"As a fire sign, your quest for knowledge is destined to take you to great places. A wandering spirit, your nonconformist personality doesn’t put down roots easily—not when there’s a whole wide world to be discovered. ";
+            }
+        }else if(month==11){
+            if(day<20){
+                zodiacIfo="Sagittarius"+"\n"+"Sagittarius: Spontaneous"+"\n"+"As a fire sign, your quest for knowledge is destined to take you to great places. A wandering spirit, your nonconformist personality doesn’t put down roots easily—not when there’s a whole wide world to be discovered. ";;
+            }
+            else{
+                zodiacIfo="Capricorn"+"\n"+"Capricorn: Consistent "+"\n"+"Methodical, practical and determined, there is no deterring a Capricorn once they have a goal in their sights. Not one for small talk and vain flattery, this quest for keeping things real means that your inner circle is small but loyal. ";
+            }
+        }
+
+        return zodiacIfo;
+    }
+    private String getZodiacSign(int day,int month){
+        String zodiacsign ="";
+
+        if(month==0){
+            if(day<20){
+                zodiacsign="Capricorn" ;
+            }
+            else{
+                zodiacsign="Aquarius";
+            }
+        }else if(month==1){
+            if(day<20){
+                zodiacsign="Aquarius";
+            }
+            else{
+                zodiacsign="Pisces";
+            }
+        }else if(month==2){
+            if(day<20){
+                zodiacsign="Pisces";
+                ;
+            }
+            else{
+                zodiacsign="Aries";
+            }
+        }else if(month==3){
+            if(day<20){
+                zodiacsign="Aries";
+            }
+            else{
+                zodiacsign="Taurus";
+            }
+        }else if(month==4){
+            if(day<20){
+                zodiacsign="Taurus";
+            }
+            else{
+                zodiacsign="Gemini";
+            }
+        }else if(month==5){
+            if(day<20){
+                zodiacsign="Gemini";
+            }
+            else{
+                zodiacsign="Cancer";
+            }
+        }else if(month==6){
+            if(day<20){
+                zodiacsign="Cancer";
+            }
+            else{
+                zodiacsign="Leo";
+            }
+        }else if(month==7){
+            if(day<20){
+                zodiacsign="Leo";
+            }
+            else{
+                zodiacsign="Virgo";
+            }
+        }else if(month==8){
+            if(day<20){
+                zodiacsign="Virgo";
+            }
+            else{
+                zodiacsign="Libra";
+            }
+        }else if(month==9){
+            if(day<20){
+                zodiacsign="Libra";
+            }
+            else{
+                zodiacsign="Scorpio";
+            }
+        }else if(month==10){
+            if(day<20){
+                zodiacsign="Scorpio";
+            }
+            else{
+                zodiacsign="Sagittarius";
+            }
+        }else if(month==11){
+            if(day<20){
+                zodiacsign="Sagittarius";
+            }
+            else{
+                zodiacsign="Capricorn";
+            }
+        }
+
+        return zodiacsign;
+    }
+    private int getZodiacImage(String zodiacSign ) {
+        int imageResId = 0;
+        String zodiacsign;
+
+
+        if (zodiacSign.equals("Capricorn")) {
+            imageResId = R.drawable.capricorn;
+        } else if (zodiacSign.equals("Aquarius")) {
+            imageResId = R.drawable.aquarius;
+        } else if (zodiacSign.equals("Pisces")) {
+            imageResId = R.drawable.pisces;
+        } else if (zodiacSign.equals("Aries")) {
+            imageResId = R.drawable.aries;
+        } else if (zodiacSign.equals("Taurus")) {
+            imageResId = R.drawable.taurus;
+        } else if (zodiacSign.equals("Gemini")) {
+            imageResId = R.drawable.gemini;
+        } else if (zodiacSign.equals("Cancer")) {
+            imageResId = R.drawable.cancer;
+            System.out.println(imageResId);
+        } else if (zodiacSign.equals("Leo")) {
+            imageResId = R.drawable.leo;
+        } else if (zodiacSign.equals("Virgo")) {
+            imageResId = R.drawable.virgo;
+        } else if (zodiacSign.equals("Libra")) {
+            imageResId = R.drawable.libra;
+        } else if (zodiacSign.equals("Scorpio")) {
+            imageResId = R.drawable.scorpio;
+        } else if (zodiacSign.equals("Sagittarius")) {
+            imageResId = R.drawable.sagittarius;
+        }
+
+        return imageResId;
+    }
+    private void setZodiacImage(int imageResId) {
+            imageView.setImageResource(imageResId);
+        }
+
+    }
+
+
+
+
